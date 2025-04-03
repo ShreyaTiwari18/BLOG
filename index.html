@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Recovery Techniques</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://png.pngtree.com/element_our/png/20181227/database-glyph-black-icon-png_291831.jpg" alt="Database Icon" class="logo">
+            <h1>Database Recovery Techniques</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li><br>
+                <li><a href="#techniques">Techniques</a></li><br>
+                <li><a href="#comparison">Comparison</a></li>
+                <li><a href="#best-practices">Best Practices</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h2 class="animate-text">Protect Your Data with Advanced Recovery Techniques</h2>
+                <p>Learn how to recover your database from failures and ensure data integrity</p>
+                <button class="cta-button pulse">Explore Techniques</button>
+            </div>
+        </section>
+
+        <section id="overview" class="section">
+            <h2>Database Recovery Overview</h2>
+            <div class="card-container">
+                <div class="card slide-in">
+                    <i class="fas fa-database"></i>
+                    <h3>What is Database Recovery?</h3>
+                    <p>The process of restoring a database to a correct state after a failure has occurred.</p>
+                </div>
+                <div class="card slide-in">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Why is it Important?</h3>
+                    <p>Prevents data loss and maintains data consistency in case of system failures.</p>
+                </div>
+                <div class="card slide-in">
+                    <i class="fas fa-clock"></i>
+                    <h3>When is it Needed?</h3>
+                    <p>System crashes, transaction failures, disk failures, or catastrophic events.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="techniques" class="section dark">
+            <h2>Common Recovery Techniques</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>1. Rollback/Rollforward</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Rollback undoes changes made by uncommitted transactions, while rollforward reapplies committed transactions from logs.</p>
+                        <div class="tech-details">
+                            <h4>When to use:</h4>
+                            <ul>
+                                <li>Transaction failures</li>
+                                <li>System crashes during transaction processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>2. Shadow Paging</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Maintains two page tables (current and shadow) to enable recovery by simply discarding the current page table.</p>
+                        <div class="tech-details">
+                            <h4>Advantages:</h4>
+                            <ul>
+                                <li>No log overhead</li>
+                                <li>Simple implementation</li>
+                                <li>Good for small databases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>3. ARIES (Algorithms for Recovery and Isolation Exploiting Semantics)</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>A state-of-the-art recovery algorithm that uses write-ahead logging and supports fine-grained locking.</p>
+                        <div class="tech-details">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>Log-based recovery</li>
+                                <li>Supports partial rollback</li>
+                                <li>Redo and undo phases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="section">
+            <h2>Technique Comparison</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Technique</th>
+                            <th>Complexity</th>
+                            <th>Overhead</th>
+                            <th>Recovery Time</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rollback/Rollforward</td>
+                            <td>Medium</td>
+                            <td>Moderate (logging)</td>
+                            <td>Depends on log size</td>
+                            <td>OLTP systems</td>
+                        </tr>
+                        <tr>
+                            <td>Shadow Paging</td>
+                            <td>Low</td>
+                            <td>High (double writes)</td>
+                            <td>Fast</td>
+                            <td>Small databases</td>
+                        </tr>
+                        <tr>
+                            <td>ARIES</td>
+                            <td>High</td>
+                            <td>Moderate (logging)</td>
+                            <td>Depends on failure</td>
+                            <td>Large, critical systems</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="best-practices" class="section dark">
+            <h2>Recovery Best Practices</h2>
+            <div class="practices-container">
+                <div class="practice-item">
+                    <div class="practice-icon rotate">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <h3>Regular Backups</h3>
+                    <p>Schedule automated backups and verify their integrity regularly.</p>
+                </div>
+                <div class="practice-item">
+                    <div class="practice-icon rotate">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Transaction Logging</h3>
+                    <p>Maintain detailed transaction logs for point-in-time recovery.</p>
+                </div>
+                <div class="practice-item">
+                    <div class="practice-icon rotate">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h3>Test Recovery Procedures</h3>
+                    <p>Regularly test your recovery process to ensure it works when needed.</p>
+                </div>
+                <div class="practice-item">
+                    <div class="practice-icon rotate">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Disaster Recovery Plan</h3>
+                    <p>Have a comprehensive plan for catastrophic failures.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Database Recovery Techniques</p>
+            <p>Educational Website for Database Management Systems</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
